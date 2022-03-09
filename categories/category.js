@@ -1,0 +1,5 @@
+// importando sequelize
+const Sequelize = require("sequelize");
+const connection = require("../database/database");
+
+
