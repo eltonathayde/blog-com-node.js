@@ -11,6 +11,10 @@ const categoreisController =require("./categories/categoreisCrontroller")
 // carregando o arquivo  de artigos
 const articlesController = require("./artigos/articlesController")
 
+// importando models das tabelas
+const Article = require("./artigos/Articles");
+const Category = require("./categories/Category");
+
 // configurar a view engine, para exibição de html
 app.set("view engine","ejs");
 
