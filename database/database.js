@@ -6,6 +6,7 @@ const Sequelize = require("sequelize");
 const connection = new Sequelize('blogelton','root','1436J7ton@',{
     host:'localhost',
     dialect:'mysql',
+    timezone: "-03:00", 
     
     // para tiar a msg Executing (default): SELECT 1+1 AS result do terminal
     logging: false
