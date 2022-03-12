@@ -22,10 +22,25 @@
                     <th><%= category.slug %></th>
                     <th>
                         <button class="btn btn-warning">Editar</button>
-                        <button class="btn btn-danger">Delete</button>
+                        <form action="/categories/delete" method="post" style="display: inline;" onsubmit="confirmaDelecao(event,this)">
+                            <input type="hidden" name="id" value="<%= category.id %>">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
                     </th>
                 </tr>
           <%  })  %>
         </tbody>
     </table>
 </div>
+<!-- criando função pra confirmar a deleção de um categoria  -->
+<script>
+     function confirmaDelecao(event,form){
+        //  impedindo que o formulario seja submetido 
+        event.preventDefault();
+       var decisao = confirm("você quer deltar esta categoria ?");
+       if(decisao){
+           form.submit();
+       }
+     }
+</script>
+</html>
