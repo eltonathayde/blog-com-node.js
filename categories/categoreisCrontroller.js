@@ -85,6 +85,20 @@ router.post("/categories/delete",(req,res)=>{
     }).catch(erro=>{
         res.redirect("/admin/categories");
     })
+ });
+//  criando rota para editar dados da categoria 
+ router.post("categories/upate",(req,res)=>{
+     var id = req.body.id;
+     var title= req.body.title;
+
+    //  atualizando dados com sequelize
+    Category.update({title:title,slug:slugify(title)},{
+        where:{
+            id:id
+        }
+    }).then(()=>{
+        res.redirect("/admin/categories");  
+    })
 
  });
 module.exports = router; 
