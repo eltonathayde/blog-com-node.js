@@ -42,7 +42,13 @@ try {
 
 //  criando rota principal, sempre req/res
 app.get("/",(req,res)=> {
-    res.render("index"); //para renderizar as views precisa ser res.render e o nome da view
+
+// chamando os model e pesquisando todos os arquivos
+    Article.findAll().then(articles =>{
+      res.render("index", {articles:articles}); //para renderizar as views precisa ser res.render e o nome da view
+    });
+  
+    
 });
 
 // porta que vai iniciar o projeto  efunçãod e call back
