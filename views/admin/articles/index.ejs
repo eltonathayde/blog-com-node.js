@@ -1,0 +1,45 @@
+<%- include ('../../partials/header.ejs') %> 
+<%- include ('../../partials/navbar.ejs') %> 
+
+<div class="container">
+    <h2>Artigos</h2>
+    <a href="/admin/articles/new" class="btn btn-primary"> Criar novo Artigo</a>
+    <br>
+    <table class="table table-bordered mt-2">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Slug</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% articles.forEach(article => { %>
+                <tr>
+                    <td><%= article.id%></td>
+                    <td><%= article.title%></td>
+                    <td><%= article.slug%></td>
+                    <td><%= article.category.title%></td>
+                    <td> <form action="/articles/delete" method="post" style="display: inline;" onsubmit="confirmaDelecao(event,this)">
+                        <input type="hidden" name="id" value="<%= article.id %>">
+                        <button class="btn btn-danger">Delete</button>
+                    </form></td>
+              </tr>
+           <% });%>
+        </tbody>
+    </table>
+</div>
+<!-- criando função pra confirmar a deleção de um categoria  -->
+<script>
+     function confirmaDelecao(event,form){
+        //  impedindo que o formulario seja submetido 
+        event.preventDefault();
+       var decisao = confirm("você quer deltar este arquivo ?");
+       if(decisao){
+           form.submit();
+       }
+     }
+</script>
+</html>

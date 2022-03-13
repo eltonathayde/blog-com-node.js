@@ -7,7 +7,12 @@ const slugify = require("slugify")
 
 
 router.get("/admin/articles",(req,res)=>{
-     res.send('ROTA DE ARTIGOS')
+    Article.findAll({
+        // incluindo o model category na busca
+        include:[{model:Category}]
+    }).then(articles=>{
+        res.render("admin/articles/index",{articles:articles})
+    });
 });
 
 router.get("/admin/articles/new",(req,res)=>{
@@ -31,6 +36,30 @@ router.post("/articles/save",(req,res)=>{
         res.redirect("/admin/articles");
     });
 });
+    // criando rotas para deletar arquivos
+    router.post("/articles/delete",(req,res)=>{
+        var id = req.body.id;
+        // verificando se o id e difente de  nulo 
+        if(id != undefined){
     
+            if(!isNaN(id)){
+    
+                Article.destroy({
+                        where: {
+                            id:id
+                        }
+                }).then(()=>{
+                    res.redirect("/admin/articles");
+                });
+    
+    
+            }else{ // se o id não for um numero é redirecionado para pagina de listagem de   categorias
+                res.redirect("/admin/articles");
+            }
+    
+        }else{ // se o ider for nulo, e redirecionado para pagina  de listagem de categorias 
+            res.redirect("/admin/articles");
+        }
+    });
 
 module.exports= router;
